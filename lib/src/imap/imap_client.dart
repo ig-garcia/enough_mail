@@ -2692,6 +2692,7 @@ class ImapClient extends ClientBase {
                   .completeError(ImapException(this, response.details));
             }
           }
+          _tasks.remove(commandId);
         } catch (e, s) {
           print('Unable to complete task ${task.command.logText}: $e $s');
           print('response: ${imapResponse.parseText}');
@@ -2701,6 +2702,7 @@ class ImapClient extends ClientBase {
           } on Exception {
             // ignore
           }
+          _tasks.remove(commandId);
         }
       } else {
         log('ERROR: no task found for command [$commandId]');
